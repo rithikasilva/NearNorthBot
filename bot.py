@@ -21,6 +21,8 @@ help_message = 'Actions:\n\n' \
                '!checkferrisf - checks the West Ferris Facebook page for the latest post\n\n' \
                '-----------------------------------------------------\n' \
 
+
+
 # Function that wraps desired text input into discord bot wrapper
 def wrap_box(to_be_wrapped):
     return "```" + to_be_wrapped + "```"
