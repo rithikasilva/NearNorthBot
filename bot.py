@@ -1,5 +1,4 @@
 import discord
-import random
 import nndsbChecker
 import chippewaChecker
 import westferrisChecker
@@ -29,7 +28,7 @@ def wrap_box(to_be_wrapped):
 
 # Function that repeats every 4 hours to check for news
 @tasks.loop(hours=4)
-async def mytask():
+async def my_task():
 
     # Ensures that the loop doesn't begin before the client is initialized
     await client.wait_until_ready()
@@ -41,7 +40,7 @@ async def mytask():
     channel = client.get_channel(config.nndsb_updates_channel)
 
     # Sets content as non-user check for NNDSB Website
-    content = nndsbChecker.checkWebsite(False)
+    content = nndsbChecker.check_website(False)
     # If there is content to display, display the content in the specified channel
     if content != False:
         await channel.send(wrap_box("NNDSB WEB START"))
@@ -49,7 +48,7 @@ async def mytask():
         await channel.send(wrap_box("NNDSB WEB END"))
 
     # Sets content as non-user check for NNDSB Facebook
-    content = nndsbChecker.checkFacebook(False)
+    content = nndsbChecker.check_facebook(False)
     # If there is content to display, display the content in the specified channel
     if content != False:
         await channel.send(wrap_box("NNDSB FACEBOOK START"))
@@ -57,7 +56,7 @@ async def mytask():
         await channel.send(wrap_box("NNDSB FACEBOOK END"))
 
     # Sets content as non-user check for Chippewa Web
-    content = chippewaChecker.checkWebsite(False)
+    content = chippewaChecker.check_website(False)
     # If there is content to display, display the content in the specified channel
     if content != False:
         await channel.send(wrap_box("CHIPPEWA WEB START"))
@@ -65,7 +64,7 @@ async def mytask():
         await channel.send(wrap_box("CHIPPEWA WEB END"))
 
     # Sets content as non-user check for Chippewa Facebook
-    content = chippewaChecker.checkFacebook(False)
+    content = chippewaChecker.check_facebook(False)
     # If there is content to display, display the content in the specified channel
     if content != False:
         await channel.send(wrap_box("CHIPPEWA FACEBOOK START"))
@@ -73,7 +72,7 @@ async def mytask():
         await channel.send(wrap_box("CHIPPEWA FACEBOOK END"))
 
     # Sets content as non-user check for West Ferris Web
-    content = westferrisChecker.checkWebsite(False)
+    content = westferrisChecker.check_website(False)
     # If there is content to display, display the content in the specified channel
     if content != False:
         await channel.send(wrap_box("WEST FERRIS WEB START"))
@@ -81,7 +80,7 @@ async def mytask():
         await channel.send(wrap_box("WEST FERRIS WEB END"))
 
     # Sets content as non-user check for West Ferris Facebook
-    content = westferrisChecker.checkFacebook(False)
+    content = westferrisChecker.check_facebook(False)
     if content != False:
         # If there is content to display, display the content in the specified channel
         await channel.send(wrap_box("WEST FERRIS FACEBOOK START"))
@@ -119,36 +118,36 @@ async def on_message(message):
 
     # If the user asks to check the NNDSB website page, display the latest post
     elif message.content.startswith('!checknndsbw'):
-        content = nndsbChecker.checkWebsite(True)
+        content = nndsbChecker.check_website(True)
         await message.channel.send(content)
 
     # If the user asks to check the NNDSB Facebook page, display the latest post
     elif message.content.startswith('!checknndsbf'):
-        content = nndsbChecker.checkFacebook(True)
+        content = nndsbChecker.check_facebook(True)
         await message.channel.send(content)
 
     # If the user asks to check the Chippewa website page, display the latest post
     elif message.content.startswith('!checkchippewaw'):
-        content = chippewaChecker.checkWebsite(True)
+        content = chippewaChecker.check_website(True)
         await message.channel.send(content)
 
     # If the user asks to check the Chippewa Facebook page, display the latest post
     elif message.content.startswith('!checkchippewaf'):
-        content = chippewaChecker.checkFacebook(True)
+        content = chippewaChecker.check_facebook(True)
         await message.channel.send(content)
 
     # If the user asks to check the West Ferris website page, display the latest post
     elif message.content.startswith('!checkferrisw'):
-        content = westferrisChecker.checkWebsite(True)
+        content = westferrisChecker.check_website(True)
         await message.channel.send(content)
 
     # If the user asks to check the West Ferris Facebook page, display the latest post
     elif message.content.startswith('!checkferrisf'):
-        content = westferrisChecker.checkFacebook(True)
+        content = westferrisChecker.check_facebook(True)
         await message.channel.send(content)
 
 
 # Start the four hour checks for news
-mytask.start()
+my_task.start()
 # Run the bot
 client.run(config.bot_key)

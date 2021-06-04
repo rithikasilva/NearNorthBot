@@ -7,3 +7,5 @@ News is gathered from the NNDSB website, Chippewa website, and West Ferris websi
 The program will automatically gather the newest post from each source every four hours and post it to the specified channel. If a new post is not made, the bot will not repost the same information.
 
 When a user request information, the bot will return the newest post. This will be done regardless of previous calls of the same information.
+
+When setting this bot up, remember to specify the channel-id that your sever has for the nndsb-updates channel and specify your config values in a config.py file.
